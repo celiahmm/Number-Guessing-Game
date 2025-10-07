@@ -8,6 +8,9 @@ public class Game {
 
     private int numberToGuess;
 
+    // stores highest score for each level
+    private int[] highScores = {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
+
     public void displayMenu() {
         System.out.println("""
                 \nWelcome to the Number Guessing Game!
@@ -41,6 +44,15 @@ public class Game {
         return level;
     }
 
+    String getLevelName(int level) {
+        return switch (level) {
+            case 1 -> "Easy";
+            case 2 -> "Medium";
+            case 3 -> "Hard";
+            default -> "Unknown";
+        };
+    }
+
     private int getNbOfChances(int level) {
         return switch (level) {
             case 1 -> 10;
@@ -50,13 +62,21 @@ public class Game {
         };
     }
 
-    String getLevelName(int level) {
-        return switch (level) {
-            case 1 -> "Easy";
-            case 2 -> "Medium";
-            case 3 -> "Hard";
-            default -> "Unknown";
-        };
+    private void updateHighScores(int level, int score) {
+        if (score < highScores[level - 1])  {
+            highScores[level - 1] = score;
+        }
+    }
+
+    public void displayHighScores() {
+        System.out.println("\n\uD83C\uDFC6 HIGH SCORES:");
+        for (int i = 0; i < highScores.length; i++) {
+            if (highScores[i] == Integer.MAX_VALUE) {
+                System.out.println(getLevelName(i+1) + ": Not set yet");
+            } else {
+                System.out.println(getLevelName(i+1) + ": " + highScores[i] + " attempts.");
+            }
+        }
     }
 
     public void playGame() {
@@ -71,6 +91,8 @@ public class Game {
 
         int attempts = 0;
         boolean hasWon = false;
+
+        long startTime = System.currentTimeMillis();
 
         while (attempts < maxAttempts && !hasWon) {
             try {
@@ -89,16 +111,20 @@ public class Game {
                 System.out.println("Invalid choice. Please enter a number between 1 and 100.");
                 scanner.next();
             }
-
         }
 
-
         if (hasWon) {
-            System.out.println("Congratulations! You guessed the correct number in " +
-                    attempts + "/" + maxAttempts + " attempts");
+            System.out.println("Congratulations! You guessed the correct number in " + attempts + "/" + maxAttempts + " attempts");
+            updateHighScores(level, attempts);
         } else {
             System.out.println("Game over! The correct number was: " + numberToGuess);
         }
+
+        long endTime = System.currentTimeMillis();
+        long timeInSeconds = (endTime - startTime) / 1000;
+        System.out.println("Time taken: " + timeInSeconds + " seconds");
+
+        displayHighScores();
     }
 
     public void start() {
