@@ -16,7 +16,8 @@ A fun and interactive command-line number guessing game built in Java. The compu
   -	Hard → 3 attempts
 -	⏱️ **Timer** — see how long you take to guess the number
 -	🔢 **Attempts counter**
--	🏆 **High scores** — best score per difficulty (stored in memory)
+-	🏆 **High scores with JSON persistence** — best score per difficulty saved in `highScores.json`
+-   🎨 **Colored console output** — ANSI colors for better visual experience
 -	🔁 **Play again option** — replay as many times as you want
 
 ---
@@ -30,23 +31,37 @@ git clone https://github.com/celiahmm/Number-Guessing-Game.git
 cd Number-Guessing-Game
 ```
 
-**2. Compile the source code:**
+**2. Compile and package with Maven:**
 
 ```bash
-javac -d out src/*.java
+mvn package
 ```
 
 **3. Run the game:**
 ```bash
-java -cp out Main
+java -cp target/classes Main
+```
+
+Or using Maven exec plugin:
+```bash
+mvn exec:java -Dexec.mainClass="Main"
 ```
 ---
 
 ## 💻 Example Gameplay
 
 ```
-Welcome to the Number Guessing Game!
-I'm thinking of a number between 1 and 100.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*               Welcome to the Number Guessing Game!                  *
+*          I'm thinking of a number between 1 and 100.                *
+*  You have a limited number of chances to guess the correct number   *
+*                                                                     *
+*               Please select the difficulty level:                   *
+*                   1. Easy (10 chances)                              *
+*                   2. Medium (5 chances)                             *
+*                   3. Hard (3 chances)                               *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 Please select the difficulty level:
 1. Easy (10 chances)
@@ -54,7 +69,7 @@ Please select the difficulty level:
 3. Hard (3 chances)
 
 Enter your choice: 2
-Great! You have selected the Medium difficulty level.
+Great! You have selected the medium difficulty level.
 Let's start the game!
 
 Enter your guess: 50
@@ -77,22 +92,21 @@ Play again? (yes/no): no
 Thank you for playing! Goodbye!
 ```
 ---
-## 🔗 About the Project
 
-This project was built as part of the 
-_[roadmap.sh - Number Guessing Game](https://roadmap.sh/projects/number-guessing-game)_ challenge.
-
-
----
 ## 🚀 Future Improvements
 -	Add a hint system (e.g., “The number is even”)
--	Save high scores to a file for persistence
--	Add color output for a more dynamic CLI experience
+-	Leaderboards with timestamps and player names
 
 ---
 
 ## 🧱 Technologies Used
 -	Java 17+
+-	Maven
+-	org.json library
 -	Command Line Interface (CLI)
 
 ---
+## 🔗 About the Project
+
+This project was built as part of the
+_[roadmap.sh - Number Guessing Game](https://roadmap.sh/projects/number-guessing-game)_ challenge.
