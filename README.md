@@ -104,5 +104,4 @@ Thank you for playing! Goodbye!
 ---
 ## 🔗 About the Project
 
-This project was built as part of the
-_[roadmap.sh - Number Guessing Game](https://roadmap.sh/projects/number-guessing-game)_ challenge.
+This project was built as part of the _[roadmap.sh - Number Guessing Game](https://roadmap.sh/projects/number-guessing-game)_ challenge.
