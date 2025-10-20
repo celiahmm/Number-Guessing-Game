@@ -31,21 +31,17 @@ git clone https://github.com/celiahmm/Number-Guessing-Game.git
 cd Number-Guessing-Game
 ```
 
-**2. Compile and package with Maven:**
+**2. Build the project with Maven:**
 
 ```bash
-mvn package
+mvn clean compile
 ```
 
 **3. Run the game:**
 ```bash
-java -cp target/classes Main
+mvn exec:java
 ```
 
-Or using Maven exec plugin:
-```bash
-mvn exec:java -Dexec.mainClass="Main"
-```
 ---
 
 ## 💻 Example Gameplay
